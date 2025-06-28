@@ -2,7 +2,9 @@ import { Schema, model, Types } from "mongoose";
 const attendees = new Schema({
   name:{type: String },
   email:{type: String},
-  confirmedAt: { type: Date, default: Date.now}
+  confirmedAt: { type: Date, default: Date.now},
+  attendance: {type: Boolean },
+  additionalGuests: {type: Number, default: 0}
 });
 const collection = "events";
 const schema = new Schema(
