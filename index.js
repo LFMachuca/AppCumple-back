@@ -12,7 +12,7 @@ import cors from "cors"
 const server = express();
 const port = process.env.PORT || 8000;
 const ready = async () => {
-    console.log("Server is running on port 8080");
+    console.log("Server is running on port 8000");
     await dbConnect(process.env.DB_LINK);
 };
 server.listen(port,ready);
@@ -26,7 +26,9 @@ server.use(express.urlencoded({extended:true}));
 server.use(express.static("public"));
 server.use(morgan("dev"));
 server.use(cookieParser())
-server.use(cors())
+server.use(cors({
+    origin: '*'
+}))
 /*Router settings */
 server.use("/",indexRouter);
 
