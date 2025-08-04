@@ -1,4 +1,4 @@
-import { usersManager } from "../managers/mongo/manager.mongo.js";
+import { guestsManager } from "../managers/mongo/manager.mongo.js";
 import nodeCron from "node-cron";
 import { sendMessageJob } from "./sendMessage.job.js";
 const birthdayReminderJob = async () => {
@@ -6,7 +6,7 @@ const birthdayReminderJob = async () => {
         const today = new Date();
         const day = today.getDate();
         const month = today.getMonth()+1;
-        const users = await usersManager.readAll({$expr:{$eq: [{$month:"$birthday"}, month]}});
+        const users = await guestsManager.readAll({$expr:{$eq: [{$month:"$birthday"}, month]}});
         users.forEach(user => {
             const userBirthday = new Date(user.birthday);
             if(userBirthday.getDate() > day){

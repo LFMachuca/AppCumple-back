@@ -1,18 +1,21 @@
 import express from "express";
 import morgan from "morgan";
 import dbConnect from "./src/shared/config/dbConnect.config.js";
-import "dotenv/config.js"
+import "./src/shared/config/env.config.js"
+import argvsConfig from "./src/shared/config/argvs.config.js";
 import {engine} from "express-handlebars";
 import __dirname from "./utils.js";
 import indexRouter from "./src/routes/index.router.js";
 import { startBirthdayReminderJob } from "./src/shared/jobs/birthdayReminder.job.js";
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import pathHandler from "./src/shared/middlewares/pathHandler.mid.js";
+import errorHandler from "./src/shared/middlewares/errorHandler.mid.js";
 /*Server settings */
 const server = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 const ready = async () => {
-    console.log("Server is running on port 8000");
+    console.log(`Server is running on port ${port} and mode ${argvsConfig.mode}`);
     await dbConnect(process.env.DB_LINK);
 };
 server.listen(port,ready);
@@ -27,10 +30,12 @@ server.use(express.static("public"));
 server.use(morgan("dev"));
 server.use(cookieParser())
 server.use(cors({
-    origin: '*'
+    origin: 'http://localhost:5173',
+    credentials:true
 }))
 /*Router settings */
 server.use("/",indexRouter);
-
+server.use(pathHandler);
+server.use(errorHandler);
 /* Jobs */
 // startBirthdayReminderJob();

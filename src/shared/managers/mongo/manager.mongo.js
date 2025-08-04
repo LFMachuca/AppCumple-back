@@ -1,4 +1,5 @@
-import User from "../../../modules/users/users.model.js";
+import Admin from "../../../modules/admin/admin.model.js"
+import Guest from "../../../modules/guests/guests.model.js"
 import Event from "../../../modules/events/events.model.js";
 class Manager {
   constructor(model) {
@@ -11,7 +12,7 @@ class Manager {
 
   readById = async (id) => await this.model.findOne({ _id: id }).lean();
 
-  readBy = async (filter, projection) => await this.model.findOne(filter, projection).lean();
+  readBy = async (filter) => await this.model.findOne(filter).lean();
 
   updateById = async (id, data) =>
     await this.model.findByIdAndUpdate(id, data, { new: true });
@@ -19,6 +20,7 @@ class Manager {
   destroyById = async (id) => await this.model.findByIdAndDelete(id);
 }
 
-const usersManager = new Manager(User);
+const guestsManager = new Manager(Guest);
 const eventsManager = new Manager(Event);
-export { usersManager, eventsManager};
+const adminsManager = new Manager(Admin);
+export { guestsManager, eventsManager, adminsManager};

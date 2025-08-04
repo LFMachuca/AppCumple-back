@@ -1,0 +1,7 @@
+import { genSalt, hashSync, compareSync, genSaltSync } from "bcrypt";
+
+const createHash = (pass) => hashSync(pass, genSaltSync(10));
+
+const compareHash = (pass, dbPass) => compareSync(pass, dbPass);
+
+export { createHash, compareHash };

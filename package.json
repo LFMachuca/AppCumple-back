@@ -4,23 +4,31 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./index.js",
-    "dev": "node --watch ./index.js"
+    "start": "node ./index.js --mode prod",
+    "dev": "node --watch ./index.js --mode dev",
+    "test":"node ./index.js --mode test",
+    "qa":"node ./index.js --mode qa"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "commander": "^14.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.1",
     "morgan": "^1.10.0",
     "node-cron": "^4.1.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "twilio": "^5.7.1"
   }
 }
