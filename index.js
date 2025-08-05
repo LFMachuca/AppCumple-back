@@ -30,7 +30,7 @@ server.use(express.static("public"));
 server.use(morgan("dev"));
 server.use(cookieParser())
 server.use(cors({
-    origin: ['http://localhost:5173','https://app-cumple-front.vercel.app/'],
+    origin: ['http://localhost:5173','http://app-cumple-front.vercel.app/'],
     credentials:true
 }))
 /*Router settings */
