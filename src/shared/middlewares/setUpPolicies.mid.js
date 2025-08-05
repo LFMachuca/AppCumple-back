@@ -3,6 +3,9 @@ import {verifyToken} from "../utils/token.util.js"
 
 const setUpPolicies = (policies) => async (req, res, next) =>{
     try {
+        if (req.method === 'OPTIONS') {
+            return next();
+        }
         if(policies.includes("PUBLIC")) return next();
         const token = req?.cookies?.token;
         const data = verifyToken(token);
