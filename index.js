@@ -24,11 +24,6 @@ server.engine("handlebars", engine());
 server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 /*Middlewares settings */
-server.use(express.json());
-server.use(express.urlencoded({extended:true}));
-server.use(express.static("public"));
-server.use(morgan("dev"));
-server.use(cookieParser())
 server.use(cors({
     origin: [
         'http://localhost:5173',
@@ -39,6 +34,11 @@ server.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     optionsSuccessStatus: 200
 }))
+server.use(express.json());
+server.use(express.urlencoded({extended:true}));
+server.use(express.static("public"));
+server.use(morgan("dev"));
+server.use(cookieParser())
 /*Router settings */
 server.use("/",indexRouter);
 server.use(pathHandler);
